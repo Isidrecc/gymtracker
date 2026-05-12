@@ -26,12 +26,12 @@
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overscroll-behavior:none;}
 body{display:flex;justify-content:center;}
-
+ 
 .screen{display:none;width:100%;max-width:430px;min-height:100vh;flex-direction:column;
   padding:0 18px calc(40px + env(safe-area-inset-bottom));
   padding-top:calc(16px + env(safe-area-inset-top));}
 .screen.active{display:flex;}
-
+ 
 /* HOME */
 .home-top{padding-top:36px;margin-bottom:36px;}
 .app-label{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
@@ -54,7 +54,7 @@ body{display:flex;justify-content:center;}
 .dot.db{background:#a08fff;}
 .home-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:20px;}
 .text-btn{background:none;border:none;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);cursor:pointer;padding:4px;}
-
+ 
 /* WORKOUT */
 .workout-top{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-top:16px;}
 .back-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:none;color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -85,7 +85,7 @@ body{display:flex;justify-content:center;}
 .add-set{margin-top:8px;width:100%;padding:8px;background:none;border:1px dashed var(--border);border-radius:7px;color:var(--muted2);font-size:12px;cursor:pointer;font-family:var(--sans);}
 .finish-btn{margin-top:24px;background:var(--accent);color:#0f0f0f;border:none;border-radius:var(--r);padding:16px;width:100%;font-size:15px;font-weight:600;cursor:pointer;}
 .finish-btn:active{opacity:.85;}
-
+ 
 /* SUMMARY */
 .sum-top{padding-top:44px;margin-bottom:26px;}
 .sum-icon{font-size:42px;margin-bottom:12px;}
@@ -106,7 +106,7 @@ body{display:flex;justify-content:center;}
 .save-btn{background:var(--accent);color:#0f0f0f;border:none;border-radius:var(--r);padding:16px;width:100%;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;}
 .save-btn:disabled{background:var(--surface2);color:var(--muted);}
 .ghost-btn{background:none;border:1px solid var(--border);border-radius:var(--r);padding:13px;width:100%;font-size:14px;color:var(--muted2);cursor:pointer;font-family:var(--sans);}
-
+ 
 /* HISTORY */
 .hist-top{display:flex;align-items:center;gap:12px;padding-top:16px;margin-bottom:22px;}
 .hist-title{font-size:20px;font-weight:500;}
@@ -126,7 +126,7 @@ body{display:flex;justify-content:center;}
 .bdg{display:inline-block;font-size:10px;padding:2px 7px;border-radius:12px;margin-left:6px;vertical-align:middle;}
 .bdg-a{background:var(--accent-dim);color:var(--accent);}
 .bdg-b{background:#1a1030;color:#a08fff;}
-
+ 
 /* CALENDAR */
 .cal-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:16px;}
 .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
@@ -153,7 +153,7 @@ body{display:flex;justify-content:center;}
 </style>
 </head>
 <body>
-
+ 
 <!-- HOME -->
 <div class="screen active" id="s0">
   <div class="home-top">
@@ -197,7 +197,7 @@ body{display:flex;justify-content:center;}
     <button class="text-btn" onclick="exportData()">↓ exportar JSON</button>
   </div>
 </div>
-
+ 
 <!-- WORKOUT -->
 <div class="screen" id="s1">
   <div class="workout-top">
@@ -214,7 +214,7 @@ body{display:flex;justify-content:center;}
   <div id="ex-container"></div>
   <button class="finish-btn" onclick="goSummary()">Ver resumen →</button>
 </div>
-
+ 
 <!-- SUMMARY -->
 <div class="screen" id="s2">
   <div class="sum-top">
@@ -245,14 +245,14 @@ body{display:flex;justify-content:center;}
   <button class="save-btn" id="save-btn" onclick="saveSession()">Guardar sesión</button>
   <button class="ghost-btn" onclick="goHome()">← Volver sin guardar</button>
 </div>
-
+ 
 <!-- HISTORY -->
 <div class="screen" id="s3">
   <div class="hist-top">
     <button class="back-btn" onclick="goHome()">←</button>
     <div class="hist-title">Historial</div>
   </div>
-
+ 
   <div class="cal-wrap">
     <div class="cal-header">
       <div class="cal-title" id="cal-title">—</div>
@@ -268,7 +268,7 @@ body{display:flex;justify-content:center;}
       <div class="cal-legend-item"><div class="cal-legend-dot lc"></div>Día C</div>
     </div>
   </div>
-
+ 
   <div class="global-stats" id="gs" style="display:none">
     <div class="gs-title">Resumen global</div>
     <div class="gs-row"><span>Total sesiones</span><span id="gs-tot">0</span></div>
@@ -278,7 +278,7 @@ body{display:flex;justify-content:center;}
   </div>
   <div id="hist-container"></div>
 </div>
-
+ 
 <script>
 /* ── RUTINA ── */
 const DAYS={
@@ -343,7 +343,7 @@ const DAYS={
     ]}
   ]}
 };
-
+ 
 /* ── INDEXEDDB ── */
 let db;
 function initDB(){
@@ -362,15 +362,15 @@ function initDB(){
 }
 function dbAdd(s){return new Promise((res,rej)=>{const t=db.transaction('sessions','readwrite');const r=t.objectStore('sessions').add(s);r.onsuccess=()=>res(r.result);r.onerror=e=>rej(e);});}
 function dbGetAll(){return new Promise((res,rej)=>{const t=db.transaction('sessions','readonly');const r=t.objectStore('sessions').getAll();r.onsuccess=()=>res(r.result.reverse());r.onerror=e=>rej(e);});}
-
+ 
 /* ── STATE ── */
 let curDay=null,sData={},picks={feel:null,lum:null};
-
+ 
 /* ── NAV ── */
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 function goHome(){showScreen('s0');renderHome();}
 function confirmBack(){if(confirm('¿Salir? Se perderán los datos del entreno.'))goHome();}
-
+ 
 /* ── HOME ── */
 async function renderHome(){
   const all=await dbGetAll();
@@ -387,7 +387,7 @@ async function renderHome(){
     dots.appendChild(d);
   });
 }
-
+ 
 /* ── WORKOUT ── */
 async function startDay(day){
   curDay=day;sData={};picks={feel:null,lum:null};
@@ -398,7 +398,7 @@ async function startDay(day){
   renderEx(d,all);
   showScreen('s1');
 }
-
+ 
 function lastBest(name,all){
   for(const s of all){
     if(!s.exercises)continue;
@@ -410,7 +410,7 @@ function lastBest(name,all){
   }
   return null;
 }
-
+ 
 function renderEx(d,all){
   const c=document.getElementById('ex-container');c.innerHTML='';
   let i=0;
@@ -426,7 +426,7 @@ function renderEx(d,all){
   });
   updProg();
 }
-
+ 
 function buildCard(ex,idx,last){
   const nw=!!ex.nw,it=!!ex.it;
   let rows='';
@@ -448,7 +448,7 @@ function buildCard(ex,idx,last){
   `;
   return card;
 }
-
+ 
 function rowHTML(ei,si,nw){
   return `<div class="set-row">
     <div class="set-n">${si+1}</div>
@@ -457,13 +457,13 @@ function rowHTML(ei,si,nw){
     <button class="chk" id="cb-${ei}-${si}" onclick="togDone(${ei},${si})">✓</button>
   </div>`;
 }
-
+ 
 function addSet(ei,nw,it){
   const si=sData[ei].sets.length;
   sData[ei].sets.push({kg:'',reps:'',done:false});
   document.getElementById(`sl-${ei}`).insertAdjacentHTML('beforeend',rowHTML(ei,si,nw));
 }
-
+ 
 function upSet(ei,si,f,v){sData[ei].sets[si][f]=v;updProg();}
 function togDone(ei,si){const s=sData[ei].sets[si];s.done=!s.done;document.getElementById(`cb-${ei}-${si}`).classList.toggle('on',s.done);updProg();}
 function updProg(){
@@ -473,7 +473,7 @@ function updProg(){
   document.getElementById('prog-fill').style.width=pct+'%';
   document.getElementById('prog-txt').textContent=`${done} de ${tot} series completadas`;
 }
-
+ 
 /* ── SUMMARY ── */
 function goSummary(){
   let sets=0,vol=0,exs=0;
@@ -493,14 +493,14 @@ function goSummary(){
   btn.disabled=false;btn.textContent='Guardar sesión';
   showScreen('s2');
 }
-
+ 
 function pick(key,val,btn,cls){
   picks[key]=val;
   const grp=document.getElementById(key==='feel'?'feel-grp':'lum-grp');
   grp.querySelectorAll('.sel-btn').forEach(b=>b.className='sel-btn');
   btn.className=`sel-btn ${cls}`;
 }
-
+ 
 async function saveSession(){
   const btn=document.getElementById('save-btn');
   btn.disabled=true;btn.textContent='Guardando...';
@@ -524,30 +524,30 @@ async function saveSession(){
   btn.textContent='✓ Guardado';
   setTimeout(goHome,700);
 }
-
+ 
 /* ── CALENDAR ── */
 let calYear=new Date().getFullYear(), calMonth=new Date().getMonth(), calSessions=[];
 const DOW=['L','M','X','J','V','S','D'];
 const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-
+ 
 function calMove(dir){
   calMonth+=dir;
   if(calMonth>11){calMonth=0;calYear++;}
   if(calMonth<0){calMonth=11;calYear--;}
   renderCal();
 }
-
+ 
 function renderCal(){
   document.getElementById('cal-title').textContent=`${MONTHS[calMonth]} ${calYear}`;
   const grid=document.getElementById('cal-grid');
   grid.innerHTML='';
-
+ 
   // Day of week headers
   DOW.forEach(d=>{
     const el=document.createElement('div');
     el.className='cal-dow'; el.textContent=d; grid.appendChild(el);
   });
-
+ 
   // Build session map for this month
   const sessionMap={};
   calSessions.forEach(s=>{
@@ -558,7 +558,7 @@ function renderCal(){
       sessionMap[key].add(s.day);
     }
   });
-
+ 
   // First day of month (0=Sun..6=Sat), convert to Mon-based (0=Mon..6=Sun)
   const firstDay=new Date(calYear,calMonth,1).getDay();
   const startOffset=(firstDay===0)?6:firstDay-1;
@@ -566,7 +566,7 @@ function renderCal(){
   const daysInPrev=new Date(calYear,calMonth,0).getDate();
   const today=new Date();
   const todayStr=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-
+ 
   // Prev month filler
   for(let i=0;i<startOffset;i++){
     const el=document.createElement('div');
@@ -574,7 +574,7 @@ function renderCal(){
     el.textContent=daysInPrev-startOffset+1+i;
     grid.appendChild(el);
   }
-
+ 
   // Current month days
   for(let d=1;d<=daysInMonth;d++){
     const el=document.createElement('div');
@@ -591,7 +591,7 @@ function renderCal(){
     el.textContent=d;
     grid.appendChild(el);
   }
-
+ 
   // Next month filler
   const total=startOffset+daysInMonth;
   const remaining=(7-total%7)%7;
@@ -600,24 +600,23 @@ function renderCal(){
     el.className='cal-day other-month'; el.textContent=i; grid.appendChild(el);
   }
 }
-
+ 
 /* ── HISTORY ── */
 async function showHistory(){
   const all=await dbGetAll();
   calSessions=all;
-  const c=document.getElementById('hist-container');c.innerHTML='';
+  const histContainer=document.getElementById('hist-container');histContainer.innerHTML='';
   const gs=document.getElementById('gs');
-
+ 
   // Always render calendar
   renderCal();
-
-  if(!all.length){c.innerHTML='<div class="empty-msg">Sin sesiones todavía.</div>';gs.style.display='none';showScreen('s3');return;}
+ 
+  if(!all.length){histContainer.innerHTML='<div class="empty-msg">Sin sesiones todavía.</div>';gs.style.display='none';showScreen('s3');return;}
   gs.style.display='block';
-  const a=all.filter(s=>s.day==='A').length,b=all.filter(s=>s.day==='B').length;
+  const a=all.filter(s=>s.day==='A').length,b=all.filter(s=>s.day==='B').length,c=all.filter(s=>s.day==='C').length;
   const withLum=all.filter(s=>s.lumbar);
   const lumOk=withLum.filter(s=>s.lumbar==='Sin molestias').length;
   document.getElementById('gs-tot').textContent=all.length;
-  const c=all.filter(s=>s.day==='C').length;
   document.getElementById('gs-ab').textContent=`${a} A / ${b} B / ${c} C`;
   document.getElementById('gs-first').textContent=fmt(all[all.length-1].date);
   document.getElementById('gs-lum').textContent=withLum.length?`${Math.round(lumOk/withLum.length*100)}%`:'—';
@@ -635,11 +634,11 @@ async function showHistory(){
       ${detail?`<div class="hist-detail">${detail}</div>`:''}
     `;
     item.onclick=()=>item.classList.toggle('open');
-    c.appendChild(item);
+    histContainer.appendChild(item);
   });
   showScreen('s3');
 }
-
+ 
 /* ── EXPORT ── */
 async function exportData(){
   const all=await dbGetAll();
@@ -650,13 +649,13 @@ async function exportData(){
   a.href=url;a.download=`gym-tracker-${new Date().toISOString().split('T')[0]}.json`;
   a.click();URL.revokeObjectURL(url);
 }
-
+ 
 /* ── UTILS ── */
 function fmt(iso){return new Date(iso+'T12:00:00').toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short',year:'numeric'});}
-
+ 
 /* ── INIT ── */
 initDB().then(renderHome).catch(e=>{console.error(e);document.getElementById('streak-text').textContent='Error al inicializar la base de datos.';});
-
+ 
 /* ── SERVICE WORKER ── */
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
