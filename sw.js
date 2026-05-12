@@ -1,20 +1,20 @@
 const CACHE = 'gym-tracker-v1';
 const ASSETS = [
-  '/gym-tracker/',
-  '/gym-tracker/index.html',
-  '/gym-tracker/manifest.json',
-  '/gym-tracker/icon-192.png',
-  '/gym-tracker/icon-512.png',
+  '/gymtracker/',
+  '/gymtracker/index.html',
+  '/gymtracker/manifest.json',
+  '/gymtracker/icon-192.png',
+  '/gymtracker/icon-512.png',
   'https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap'
 ];
-
+ 
 // Install: cache all assets
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())
   );
 });
-
+ 
 // Activate: clear old caches
 self.addEventListener('activate', e => {
   e.waitUntil(
@@ -23,7 +23,7 @@ self.addEventListener('activate', e => {
     ).then(() => self.clients.claim())
   );
 });
-
+ 
 // Fetch: serve from cache, fall back to network
 self.addEventListener('fetch', e => {
   e.respondWith(
@@ -34,7 +34,8 @@ self.addEventListener('fetch', e => {
         const clone = response.clone();
         caches.open(CACHE).then(cache => cache.put(e.request, clone));
         return response;
-      }).catch(() => caches.match('/gym-tracker/index.html'));
+      }).catch(() => caches.match('/gymtracker/index.html'));
     })
   );
 });
+ 
