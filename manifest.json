@@ -2,7 +2,7 @@
   "name": "Gym Tracker",
   "short_name": "Gym",
   "description": "Tracker de entrenos de gimnasio",
-  "start_url": "/gym-tracker/",
+  "start_url": "/gymtracker/",
   "display": "standalone",
   "background_color": "#0f0f0f",
   "theme_color": "#0f0f0f",
